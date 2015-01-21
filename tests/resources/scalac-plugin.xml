@@ -1,4 +1,4 @@
 <plugin>
-	<name>subl/name>
+	<name>subl</name>
 	<classname>scala.sublime.tests.Plugin</classname>
 </plugin>
