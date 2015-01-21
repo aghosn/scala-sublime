@@ -13,7 +13,7 @@ object build extends Build {
   lazy val tests = Project(
     id = "plugin-",
     base = file("tests"),
-    settings = sharedSettings ++ commonDependencies ++ List(
+    settings = sharedSettings ++ publishableSettings ++ commonDependencies ++ List(
       resourceDirectory in Compile := baseDirectory.value / "resources"))
 
   
