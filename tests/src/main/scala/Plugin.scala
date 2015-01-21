@@ -1,10 +1,5 @@
-/**
- * Main component of the compiler plugin. Apply the whole compression piteline
- * and generate the good path for storing ASTs.
- *
- * @author Mathieu Demarne, Adrien Ghosn
- */
-package scala.reflect.persistence
+
+package scala.sublime.tests
 
 import scala.tools.nsc.{ Global, Phase, SubComponent }
 import scala.tools.nsc.plugins.{ Plugin => NscPlugin, PluginComponent => NscPluginComponent }
@@ -16,6 +11,16 @@ class Plugin(val global: Global) extends NscPlugin {
   val description = "prototyping typing"
 
   val components = List[NscPluginComponent](SublPluginComponent)
+
+  override def processOptions(options: List[String], error: String => Unit) {
+    options.foreach { opt =>
+      if (opt.startsWith("symb:")) {
+        SymbTable.symbols = opt.substring("symb:".length).split(";").toList
+      } else {
+        reporter.error(NoPosition, "Bad Option")
+      }
+    }
+  }
 
   private object SublPluginComponent extends NscPluginComponent {
     import global._
