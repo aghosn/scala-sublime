@@ -17,7 +17,7 @@ object sublplugin extends AutoPlugin {
   override lazy val projectSettings: Seq[sbt.Def.Setting[_]] = Seq(
     sublSymb := Nil,
     commands ++= Seq(sublSymbCmd),
-    //TODO addCompilerPlugin(),
+    addCompilerPlugin("com.begeric.github" %% "proto-plugin" % "0.1-SNAPSHOT"),
     scalacOptions ++= Seq(
       "-P:subl:symb:" + sublSymb.value.mkString(";")))
 }

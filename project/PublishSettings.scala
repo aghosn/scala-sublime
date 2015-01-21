@@ -18,7 +18,7 @@ object PublishSettings {
 	    publishArtifact in Test := false,
 	    pomExtra := (
 	      <url>https://github.com/aghosn/scala-sublime</url>
-	      <inceptionYear>2014</inceptionYear>
+	      <inceptionYear>2015</inceptionYear>
 	      <licenses>
 	        <license>
 	          <name>BSD-like</name>
