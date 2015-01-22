@@ -56,7 +56,7 @@ class Plugin(val global: Global) extends NscPlugin {
     def newPhase(prev: Phase) = new StdPhase(prev) {
       def apply(unit: CompilationUnit) {
         LookupSymbol(unit.body).foreach{t =>
-          reporter.info(t.pos, show(t), true)
+          reporter.info(t.pos, show(t) + "\nType " + show(t.tpe), true)
         }
       }
     }
