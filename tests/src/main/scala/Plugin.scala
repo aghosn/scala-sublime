@@ -9,11 +9,15 @@ class Plugin(val global: Global) extends NscPlugin {
   import global._
 
   val name = "subl"
+  val phaseName = "subl"
   val description = "prototyping typing"
 
   val components = List[NscPluginComponent](SublPluginComponent)
 
   override def processOptions(options: List[String], error: String => Unit) {
+    options.foreach{ opt => 
+      reporter.info(NoPosition, "an option "+opt, true)
+    }
     options.foreach { opt =>
       if (opt.startsWith("symb:")) {
         SymbTable.symbols = opt.substring("symb:".length).split(";").toList
