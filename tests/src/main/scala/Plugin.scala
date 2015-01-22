@@ -7,7 +7,6 @@ import scala.tools.nsc.plugins.{ Plugin => NscPlugin, PluginComponent => NscPlug
 
 class Plugin(val global: Global) extends NscPlugin {
   import global._
-  reporter.info(NoPosition, "Plugin loaded", true)
 
   val name = "subl"
   val phaseName = "subl"
@@ -48,7 +47,6 @@ class Plugin(val global: Global) extends NscPlugin {
       }
 
       def apply(tree: Tree): List[Tree] ={
-        reporter.info(NoPosition, "traversing", true)
         treesAtSymbols.clear()
         traverse(tree)
         treesAtSymbols.toList
@@ -56,7 +54,6 @@ class Plugin(val global: Global) extends NscPlugin {
     }
 
     def newPhase(prev: Phase) = new StdPhase(prev) {
-      reporter.info(NoPosition, "newPhase: " + SymbTable.symbols, true)
       def apply(unit: CompilationUnit) {
         LookupSymbol(unit.body).foreach{t =>
           reporter.info(t.pos, show(t), true)
