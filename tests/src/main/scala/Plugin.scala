@@ -38,10 +38,14 @@ class Plugin(val global: Global) extends NscPlugin {
         case x if x.symbol != null && SymbTable.symbols.contains(x.symbol.toString) =>
           treesAtSymbols += x
           super.traverse(tree)
+        case x if x.symbol != null =>
+          reporter.info(NoPosition, "symbol:" + x.symbol, true)
+          super.traverse(tree)
         case _ => super.traverse(tree)
       }
 
       def apply(tree: Tree): List[Tree] ={
+        reporter.info(NoPosition, "traversing", true)
         treesAtSymbols.clear()
         traverse(tree)
         treesAtSymbols.toList
@@ -49,7 +53,7 @@ class Plugin(val global: Global) extends NscPlugin {
     }
 
     def newPhase(prev: Phase) = new StdPhase(prev) {
-      reporter.info(NoPosition, "newPhase", true)
+      reporter.info(NoPosition, "newPhase: " + SymbTable.symbols, true)
       def apply(unit: CompilationUnit) {
         LookupSymbol(unit.body).foreach{t =>
           reporter.info(t.pos, show(t), true)
