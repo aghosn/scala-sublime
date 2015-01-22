@@ -39,11 +39,10 @@ class Plugin(val global: Global) extends NscPlugin {
       val treesAtSymbols = new ListBuffer[Tree]()
 
       override def traverse(tree: Tree): Unit = tree match {
-        case x if x.symbol != null && SymbTable.symbols.contains(x.symbol.toString) =>
+        case x if x.symbol != null && SymbTable.symbols.contains(x.symbol.decodedName) =>
           treesAtSymbols += x
           super.traverse(tree)
         case x if x.symbol != null =>
-          reporter.info(NoPosition, "symbol:" + x.symbol, true)
           super.traverse(tree)
         case _ => super.traverse(tree)
       }
