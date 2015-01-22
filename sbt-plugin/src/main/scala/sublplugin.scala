@@ -9,7 +9,7 @@ object sublplugin extends AutoPlugin {
     Command.args("subl-symb", "<args>") { (state: State, args) =>
       if(!args.isEmpty){
       Project.evaluateTask(Keys.compile in Compile,
-        (Project extract state).append(Seq(scalacOptions ++= Seq("-Ystop-after:subl", "-P:subl:symb:"+args.mkString(";"))), state))
+        (Project extract state).append(Seq(sublSymb := args.toList, scalacOptions ++= Seq("-Ystop-after:subl")), state))
       } 
       state
     }
