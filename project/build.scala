@@ -27,4 +27,9 @@ object build extends Build {
     base = file("sbt-plugin"),
     settings =  PublishSettings.publishSettings ++ publishableSettings ++ List(sbtPlugin := true, name := "subl-sbtplugin"))
 
+  lazy val serverProxy: Project = Project(
+    id = "proxy-server",
+    base = file("proxy-server"),
+    settings = sharedSettings)
+
 }
