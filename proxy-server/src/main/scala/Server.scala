@@ -14,7 +14,7 @@ object Server {
       val in = new BufferedReader(new InputStreamReader(s.getInputStream()))
       val out = new PrintWriter(s.getOutputStream, true)
 
-      var msg = in.readLine
+      val msg = in.readLine
       if(msg != null) {
         println(s"Server received msg: ${msg} from ${s.getInetAddress}")
         out.println(msg)
